@@ -1,7 +1,7 @@
 <?php
     include_once("../../config/db.php");
     $mahasiswa = mysqli_query($conn, "SELECT * FROM mahasiswa");
-    $pembayaran = mysqli_query($conn, "SELECT * FROM pembayaran");
+    $pembayaran = mysqli_query($conn, "SELECT * FROM pembayaran ");
 
     function query($query)
     {

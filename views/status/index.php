@@ -14,6 +14,7 @@ require_once("../../controllers/status/statusController.php");
 </head>
 
 <body>
+    <a href="./insert.php">Tambah data</a>
     <table border="1" cellpadding="20" cellspacing="0">
         <tr>
             <th>No</th>

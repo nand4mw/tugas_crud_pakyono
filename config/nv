@@ -1,0 +1,16 @@
+$mahasiswa = mysqli_query($conn, "SELECT 
+    mahasiswa.id_mahasiswa,
+    mahasiswa.nama,
+    mahasiswa.npm,
+    mahasiswa.tgl_lahir,
+    mahasiswa.tempat_lahir,
+    mahasiswa.jenis_kelamin,
+    mahasiswa.no_hp,
+    prodi.nama_prodi,
+    sistem_kuliah.nama_sistem_kuliah,
+    status.status_mhs, (SELECT SUM(pembayaran.nominal_terbayar) FROM pembayaran WHERE mahasiswa.id_mahasiswa = pembayaran.id_mahasiswa) AS total_pembayaran
+    FROM
+    mahasiswa INNER JOIN prodi ON mahasiswa.id_prodi = prodi.id_prodi
+    INNER JOIN sistem_kuliah ON mahasiswa.id_sistem_kuliah = sistem_kuliah.id_sistem_kuliah
+    INNER JOIN status ON mahasiswa.id_status_mhs = status.id_status_mhs;
+    ");

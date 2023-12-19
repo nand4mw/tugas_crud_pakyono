@@ -14,6 +14,7 @@ require_once("../../controllers/sistemKuliah/sistemKuliahController.php");
 </head>
 
 <body>
+<a href="./insert.php">Tambah data</a>
     <table border="1" cellpadding="20" cellspacing="0">
         <tr>
             <th>No</th>
@@ -31,8 +32,7 @@ require_once("../../controllers/sistemKuliah/sistemKuliahController.php");
             </td>
             <td>
                 <a href="update.php?id=<?= $pmb['id_sistem_kuliah'] ?> ">Update</a> |
-                <a href="delete.php?id=<?= $pmb[" id_sistem_kuliah"] ?> " onclick="return confirm('Yakin anda Ingin
-                    menghapusnya ?')">Delete</a>
+                <a href="delete.php?id=<?= $pmb[" id_sistem_kuliah"] ?> " onclick="return confirm('Yakin anda Ingin menghapusnya ?')">Delete</a>
             </td>
         </tr>
 

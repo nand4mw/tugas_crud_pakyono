@@ -15,6 +15,7 @@ require "../../controllers/mahasiswa/mahasiswaController.php";
 </head>
 
 <body>
+<a href="./insert.php">Tambah data</a>
     <table border="1" cellpadding="20" cellspacing="0">
         <tr>
             <th>NO</th>
@@ -65,9 +66,8 @@ require "../../controllers/mahasiswa/mahasiswaController.php";
                 <?= $mhs["status_mhs"] ?>
             </td>
             <td>
-                <a href="update.php?id=<?=$mhs[" id_mahasiswa"] ?> ">Update</a> |
-                <a href="delete.php?id=<?=$mhs[" id_mahasiswa"] ?> " onclick="return confirm('Yakin anda Ingin
-                    menghapusnya ?')">Delete</a>
+                <a href="update.php?id=<?=$mhs["id_mahasiswa"] ?> ">Update</a> |
+                <a href="delete.php?id=<?=$mhs["id_mahasiswa"] ?> " onclick="return confirm('Yakin anda Ingin menghapusnya ?')">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -76,3 +76,5 @@ require "../../controllers/mahasiswa/mahasiswaController.php";
 </body>
 
 </html>
+
+

@@ -14,6 +14,7 @@
  </head>
 
  <body>
+ <a href="./insert.php">Tambah data</a>
      <table border="1" cellpadding="20" cellspacing="0">
          <tr>
              <th>No</th>
@@ -26,7 +27,7 @@
              <tr>
                  <td> <?= $i++; ?> </td>
                  <td> <?= $pmb["nama_pembayaran"] ?> </td>
-                 <td> <?= $pmb["nominal_terbayar"] ?> </td>
+                 <td>Rp. <?= $pmb["nominal_terbayar"] ?> </td>
 
                  <td>
                      <a href="update.php?id=<?= $pmb["id_pembayaran"] ?> ">Update</a> |

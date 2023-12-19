@@ -21,6 +21,9 @@
     INNER JOIN status ON mahasiswa.id_status_mhs = status.id_status_mhs;
     ");
 
+
+    // $mahasiswa = mysqli_query($conn, "SELECT * FROM mahasiswa JOIN prodi ON mahasiswa.id_prodi = prodi.id_prodi JOIN sistem_kuliah ON mahasiswa.id_sistem_kuliah = sistem_kuliah.id_sistem_kuliah JOIN status ON mahasiswa.id_status_mhs = status.id_status_mhs");
+    
     function query($query)
     {
         global $conn;
@@ -48,7 +51,7 @@
 
         $query = "INSERT INTO mahasiswa (nama, npm, tgl_lahir, tempat_lahir, jenis_kelamin, no_hp, id_prodi, id_sistem_kuliah, id_status_mhs)
                   VALUES 
-    ('$nama', '$npm', '$tgl_lahir', '$tempat_lahir', '$jenis_kelamin', '$no_hp', '$id_prodi', '$id_sistem_kuliah', '$id_status_mhs')";
+    ('$nama', '$npm', '$tgl_lahir', '$tempat_lahir', '$jenis_kelamin', '$no_hp', $id_prodi, $id_sistem_kuliah, $id_status_mhs)";
 
         mysqli_query($conn, $query);
         return mysqli_affected_rows($conn);

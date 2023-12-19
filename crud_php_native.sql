@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 16, 2023 at 08:18 AM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Generation Time: Dec 20, 2023 at 12:10 AM
+-- Server version: 8.0.35-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,13 +40,6 @@ CREATE TABLE `mahasiswa` (
   `id_status_mhs` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `mahasiswa`
---
-
-INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama`, `npm`, `tgl_lahir`, `tempat_lahir`, `jenis_kelamin`, `no_hp`, `id_prodi`, `id_sistem_kuliah`, `id_status_mhs`) VALUES
-(2, ' Ananda Maulana Wahyudi ', ' 220231005422', '2003-03-31', ' sumenep ', 'laki-laki', ' 01233995872', 1, 2, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -72,13 +65,6 @@ CREATE TABLE `prodi` (
   `jenjang_prodi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `prodi`
---
-
-INSERT INTO `prodi` (`id_prodi`, `nama_prodi`, `jenjang_prodi`) VALUES
-(1, ' informatika b', ' S1 ');
-
 -- --------------------------------------------------------
 
 --
@@ -89,13 +75,6 @@ CREATE TABLE `sistem_kuliah` (
   `id_sistem_kuliah` int NOT NULL,
   `nama_sistem_kuliah` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `sistem_kuliah`
---
-
-INSERT INTO `sistem_kuliah` (`id_sistem_kuliah`, `nama_sistem_kuliah`) VALUES
-(2, 'swasta');
 
 -- --------------------------------------------------------
 
@@ -109,13 +88,6 @@ CREATE TABLE `status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `status`
---
-
-INSERT INTO `status` (`id_status_mhs`, `status_mhs`) VALUES
-(2, 'Baik');
-
---
 -- Indexes for dumped tables
 --
 
@@ -123,13 +95,17 @@ INSERT INTO `status` (`id_status_mhs`, `status_mhs`) VALUES
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`id_mahasiswa`);
+  ADD PRIMARY KEY (`id_mahasiswa`),
+  ADD KEY `id_prodi` (`id_prodi`),
+  ADD KEY `id_sistem_kuliah` (`id_sistem_kuliah`),
+  ADD KEY `id_status_mhs` (`id_status_mhs`);
 
 --
 -- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD PRIMARY KEY (`id_pembayaran`);
+  ADD PRIMARY KEY (`id_pembayaran`),
+  ADD KEY `id_mahasiswa` (`id_mahasiswa`);
 
 --
 -- Indexes for table `prodi`
@@ -157,25 +133,49 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mahasiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mahasiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `prodi`
 --
 ALTER TABLE `prodi`
-  MODIFY `id_prodi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_prodi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sistem_kuliah`
 --
 ALTER TABLE `sistem_kuliah`
-  MODIFY `id_sistem_kuliah` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_sistem_kuliah` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id_status_mhs` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_status_mhs` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`),
+  ADD CONSTRAINT `mahasiswa_ibfk_2` FOREIGN KEY (`id_sistem_kuliah`) REFERENCES `sistem_kuliah` (`id_sistem_kuliah`),
+  ADD CONSTRAINT `mahasiswa_ibfk_3` FOREIGN KEY (`id_status_mhs`) REFERENCES `status` (`id_status_mhs`);
+
+--
+-- Constraints for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id_mahasiswa`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
